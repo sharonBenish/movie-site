@@ -1,9 +1,9 @@
 <template>
   <div id="question-card">
-    <h3>Question {{index}}</h3>
-    <p>{{question.question}}</p>
+    <h3>Question {{ index+1 }}</h3>
+    <p v-html="question.question"></p>
     <div class="options">
-        <AppOptionsVue :question="question.question" :value="option" :index="index" v-for="(option, index) in questionOptions" :key="index" />
+        <AppOptionsVue :isChecked="question.chosenAnswer === option" @chosen="atChosen" :question="question.question" :value="option" :index="index" v-for="(option, index) in questionOptions" :key="index" />
     </div>
   </div>
 </template>
@@ -26,7 +26,12 @@ export default {
     },
     computed: {
         questionOptions: function () {
-            return [...this.question.incorrect_answers, this.question.correct_answer]
+            return [...this.question.incorrect_answers, this.question.correct_answer].sort(() => Math.random() - 0.5);
+        }
+    },
+    methods: {
+        atChosen: function (value) {
+            this.$emit('checked', {value, qIndex: this.index})
         }
     }
 }

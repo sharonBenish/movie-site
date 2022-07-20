@@ -1,12 +1,22 @@
 <template>
   <div :style="{background: background}" class="option">
-    <input :id="'value'+index" type="radio" :name="question" :value="value" />
+    <input :checked="isChecked" @change="$emit('chosen', value)" :id="'value'+index" type="radio" :name="question" :value="value" />
     <label :for="'value'+index">{{value}}</label>
   </div>
 </template>
 
 <script>
 export default {
+    // methods: {
+    //     optionBg: function (val) {
+    //         this.$emit('chosen', val)
+    //         if (this.question.chosenAnswer === this.question.correct_answer) {
+    //             this.background = '#3cbc5e65'
+    //         } else {
+    //             this.background = '#bc3c3c65'
+    //         }
+    //     }
+    // },
     props: {
         value: {
             default: 'Batman'
@@ -21,6 +31,10 @@ export default {
         },
         question: {
             type: String
+        },
+        isChecked: {
+            type: Boolean,
+            default: false
         }
     }
 }
