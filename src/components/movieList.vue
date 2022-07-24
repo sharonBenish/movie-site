@@ -1,11 +1,12 @@
 <template>
     <div>
-        <h3>{{heading}}</h3>
+        <h3 v-if="movies.length>0">{{heading}}</h3>
         <div id="movie-list">
             <div class="items" v-for="movie in movies" :key="movie.id">
                 <movie-card-vue :movie="movie" />
             </div>
         </div>
+        <h4 v-if="isEmpty">No results found...</h4>
     </div>
 </template>
 
@@ -25,7 +26,7 @@ export default {
         },
         heading: {
             type: String,
-            default: 'Trending this week'
+            default: ''
         },
         numberOfMovies: {
             type: Number,
@@ -34,27 +35,42 @@ export default {
     },
     data () {
         return {
-            movies: []
+            movies: [],
+            query:this.$route.params.query||localStorage.getItem('lastQuery'),
+            isEmpty:false,
         }
     },
     mounted() {
-        Axios.get(`${BASE_URL}${this.keyword}?api_key=${API_KEY}`).then(res => {
+        localStorage.setItem('lastQuery', this.query)
+        Axios.get(`${BASE_URL}${this.keyword}?query=${this.query}&api_key=${API_KEY}`).then(res => {
+            if (res.data.results.length == 0){
+                this.isEmpty = true;
+            }
             this.movies = res.data.results.slice(0, this.numberOfMovies)
-            console.log(this.movies)
+            
         })
     }
+
 }
 </script>
 
 <style scoped>
+    h3{
+        margin-top:2rem;
+        margin-bottom: 1rem;
+        font-size:2rem;
+    }
+
     #movie-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 1em;
+        row-gap: 3em;
+        column-gap: 3em;
         justify-content: space-between;
+        padding:2em 0;
     }
 
     .items {
-        flex: 0 1 250px;
+        flex: 1 1 250px;
     }
 </style>

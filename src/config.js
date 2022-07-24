@@ -6,4 +6,7 @@ export const IMG_URL = 'https://image.tmdb.org/t/p/original'
 
 export function convertToYear(date) {
     // Do some shit
+    const movieDate = new Date(date);
+    const year = movieDate.getFullYear();
+    return year;
 }
