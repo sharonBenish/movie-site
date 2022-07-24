@@ -9,6 +9,7 @@
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/trending">Trending</router-link></li>
         <li><router-link to="/top-rated">Top Rated</router-link></li>
+        <li><router-link to="/categories">Categories</router-link></li>
         <li><router-link to="/popular">Popular</router-link></li>
         <li><router-link to="/upcoming">Upcoming</router-link></li>
       </ul>
