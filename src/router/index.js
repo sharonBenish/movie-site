@@ -31,11 +31,17 @@ const routes = [
     name: 'SearchResults',
     component: ()=>import("../views/SearchResults.vue")
   },
+  {
+    path:'/movie/:id',
+    name:'Movie-Details',
+    props:true,
+    component:()=>import("../views/MovieDetails.vue"),
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 })
 
 export default router

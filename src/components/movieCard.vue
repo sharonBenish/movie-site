@@ -1,5 +1,5 @@
 <template>
-    <div id="movie-card">
+    <div id="movie-card" @click="goToMovieDetails(movie.id)">
         <img :src="imgUrl+movie.backdrop_path" class="movie-img"/>
         <div class="text">
             <div class="title">
@@ -34,6 +34,14 @@ export default {
         dateYear(date){
             const year = convertToYear(date);
             return year;
+        },
+        goToMovieDetails(id){
+            this.$router.push({
+                name:"Movie-Details",
+                params:{
+                    id:id
+                }
+            })
         }
     }
 }
@@ -62,7 +70,7 @@ export default {
 
     #movie-card {
         position: relative;
-        height:300px;
+        height:200px;
         border-radius:5px!important;
         overflow: hidden;
         //border: 1px solid #ccc;
@@ -94,5 +102,20 @@ export default {
         max-height: 15px;
         object-fit: cover;
         padding:0 5px;
+    }
+
+    @media (min-width:1024px){
+        #movie-card {
+        position: relative;
+        height:300px;
+        border-radius:5px!important;
+        overflow: hidden;
+        //border: 1px solid #ccc;
+        box-shadow: 0px 0px 20px 3px rgb(87, 87, 87);
+        transition: transform 0.5s
+        // max-width: 300px;
+        // box-shadow: 1px 2px 20px #ccc;
+    }
+
     }
 </style>

@@ -1,6 +1,9 @@
 <template>
     <div>
-        <h3 v-if="movies.length>0">{{heading}}</h3>
+        <div v-if="movies.length>0" class="top">
+            <h3>{{ heading }}</h3>
+            <router-link v-if="path" :to=path>More...</router-link>
+        </div>
         <div id="movie-list">
             <div class="items" v-for="movie in movies" :key="movie.id">
                 <movie-card-vue :movie="movie" />
@@ -32,6 +35,9 @@ export default {
             type: Number,
             default: 3
         },
+        path:{
+            type:String
+        }
     },
     data () {
         return {
@@ -55,13 +61,39 @@ export default {
 </script>
 
 <style scoped>
-    h3{
+    .top{
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
         margin-top:2rem;
         margin-bottom: 1rem;
+    }
+    h3{
+        
         font-size:2rem;
     }
 
+    .top a{
+        color:#832528;
+        text-decoration: none;
+        font-size:1.2rem;
+    }
+
     #movie-list {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 3em;
+        column-gap: 1em;
+        justify-content: space-between;
+        padding:2em 0;
+    }
+
+    .items{
+        flex: 1 1 200px;
+    }
+
+    @media(min-width:1024px){
+         #movie-list {
         display: flex;
         flex-wrap: wrap;
         row-gap: 3em;
@@ -69,8 +101,10 @@ export default {
         justify-content: space-between;
         padding:2em 0;
     }
-
-    .items {
+        .items {
         flex: 1 1 250px;
     }
+    }
+
+    
 </style>

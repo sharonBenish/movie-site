@@ -4,7 +4,12 @@
         <form class="search-box" @submit.prevent="fetchData">
           <input class="search-field" type="text" placeholder="Search for movies..." required v-model="query">
         </form>
-        <movie-list-vue :keyword="'/discover/movie'" :numberOfMovies="6" :heading="'DISCOVER'" />
+        <movie-list-vue :keyword="'/discover/movie'" :numberOfMovies="6" :heading="'DISCOVER'"/>
+        <movie-list-vue :keyword="'/trending/all/day'" :numberOfMovies="6" :heading="'Trending Today'" :path="'/trending'" />
+        <movie-list-vue :keyword="'/trending/all/week'" :numberOfMovies="6" :heading="'Trending this week'" :path="'/trending'" />
+        <movie-list-vue :keyword="'/movie/top_rated'" :numberOfMovies="6" :heading="'Top Rated Movies'" :path="'/top-rated'" />
+        <movie-list-vue :keyword="'/movie/popular'" :numberOfMovies="6" :heading="'Popular Movies'" :path="'/popular'" />
+        <movie-list-vue :keyword="'/movie/upcoming'" :numberOfMovies="6" :heading="'Upcoming Movies'" :path="'/upcoming'"/>
     </div>
   
 </template>
