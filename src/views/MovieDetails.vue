@@ -79,6 +79,7 @@ export default {
 .movie-img >img{
     width:100%;
     height: auto;
+    max-height: 400px;
     min-height:250px;
     object-fit: cover;
 }

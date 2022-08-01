@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { BASE_URL, API_KEY, IMG_URL } from '@/config'
+import { BASE_URL, API_KEY} from '@/config'
 import axios from 'axios'
 import CastComponent from '@/components/CastComponent.vue'
 export default {

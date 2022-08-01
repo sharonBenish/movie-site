@@ -39,7 +39,6 @@ export default {
 <style lang="scss" scoped>
   #container {
     margin: 0 auto;
-    max-width: 900px;
     padding:0 2rem;
   }
 

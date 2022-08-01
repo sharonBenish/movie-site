@@ -6,9 +6,10 @@
     <div>
         <p>Name: {{cast.name}}</p>
         <p>Role: {{cast.character}}</p>
-        <div class="list">
-            <movie-list :keyword="`/person/${cast.id}/movie_credits`" :numberOfMovies="3" />
-        </div>
+        <h5>Other movies:</h5>
+    </div>
+    <div class="list">
+        <movie-list :keyword="`/person/${cast.id}/movie_credits`" :numberOfMovies="4" />
     </div>
   </div>
 </template>
@@ -29,31 +30,60 @@ export default {
 
 <style scoped>
 .cast-container{
-    display:flex;
-    border:1px solid red;
+    border:2px solid rgb(176, 176, 176);
+    margin:30px 0;
+    padding:30px;
+    border-radius:1rem;
 }
 
-.profile-img{
-    width:40%;
-}
+
 
 .profile-img> img{
     max-height: 300px;
+    max-width:300px;
 }
 
 .img-fluid{
     width:100%;
-    height:auto;
+    height:100%;
     object-fit: cover;
 
 }
-
-.list{
-    border:1px solid yellow;
-    padding:0;
+>>>#movie-card{
+    box-shadow: none;
+    height:120px;
+}
+  
+>>>#movie-card:hover{
+    transform:none
+}
+>>>.items{
+    max-width:200px;
+}
+>>>#movie-list {
+    row-gap: 20px !important;
+    column-gap: 20px !important;
+    justify-content: left !important;
 }
 
->>>#movie-list {
+@media(min-width: 800px){
+    .profile-img{
+        width:40%;
+    }
+    .list{
+        width:100%;
+    }
+    .cast-container{
+        display:flex;
+        flex-wrap: wrap;
+    }
+    >>>#movie-card{
+        height:120px;
+    } 
+}
+
+
+/*>>>#movie-list {
     display: flex;
     flex-wrap: wrap;
     row-gap: 0px !important;
@@ -64,13 +94,11 @@ export default {
 }
 
 >>>.items{
-    flex: 1 1 auto !important;;
     border:3px solid orangered;
 }
 
 >>>#movie-card {
     height:100px !important;
-    border:1px solid red;
     border-radius:5px!important;
     box-shadow: none;
     transition: none;
@@ -78,6 +106,6 @@ export default {
 
 >>>#movie-card:hover{
     transform: none;
-}
+}*/
 
 </style>

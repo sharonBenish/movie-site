@@ -9,7 +9,6 @@
             </div>
             <div class="details">
                 <h5><span><img class="star" src="../assets/star.png" alt=""></span>{{ movie.vote_average.toFixed(1) }} Rating</h5>
-                <h5>{{ movie.release_date || movie.first_air_date }}</h5>
             </div>
         </div>
     </div>
