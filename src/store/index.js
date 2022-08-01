@@ -7,9 +7,6 @@ export default createStore({
   getters: {
   },
   mutations: {
-    updateKey(state){
-      state.key++
-    }
   },
   actions: {
   },

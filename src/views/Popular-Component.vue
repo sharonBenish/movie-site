@@ -1,6 +1,6 @@
 <template>
     <div>
-        <movie-list-vue :keyword="'/movie/popular'" :numberOfMovies="20" :heading="'Popular Movies'" />
+        <movie-list-vue :keyword="'/movie/popular'" :numberOfMovies="20" :heading="'Popular Movies'" :showPagination="true" />
     </div>
   
 </template>

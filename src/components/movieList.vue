@@ -9,6 +9,13 @@
                 <movie-card-vue :movie="movie" />
             </div>
         </div>
+        <vue-awesome-paginate v-if="showPagination && movies.length>0"
+    :total-items="20000"
+    :items-per-page="20"
+    :max-pages-shown="5"
+    :current-page="1"
+    :on-click="goToPage"
+  />
         <h4 v-if="isEmpty">No results found...</h4>
     </div>
 </template>
@@ -37,6 +44,10 @@ export default {
         },
         path:{
             type:String
+        },
+        showPagination:{
+            type:Boolean,
+            default:false,
         }
     },
     data () {
@@ -44,23 +55,39 @@ export default {
             movies: [],
             query:this.$route.params.query||localStorage.getItem('lastQuery'),
             isEmpty:false,
+            page:1,
         }
     },
-    mounted() {
-        localStorage.setItem('lastQuery', this.query)
-        Axios.get(`${BASE_URL}${this.keyword}?query=${this.query}&api_key=${API_KEY}`).then(res => {
+    methods:{
+        goToPage(page){
+            console.log(page)
+            this.page = page
+            //this.pageNum = page;
+            //this.key ++;
+        },
+        loadMovies(){
+            Axios.get(`${BASE_URL}${this.keyword}?query=${this.query}&api_key=${API_KEY}&page=${this.page}`).then(res => {
             if (res.data.results){
                 if (res.data.results.length == 0){
                     this.isEmpty = true;
                 };
-                console.log("results")
                 this.movies = res.data.results.slice(0, this.numberOfMovies)
             } else if(res.data.cast){
-                console.log("cast");
                 this.movies =res.data.cast.slice(0, this.numberOfMovies)
             }
             
         })
+        }
+    },
+    watch:{
+        page(newVal, oldVal){
+            this.loadMovies();
+            window.scrollTo(0,0)
+        }
+    },
+    mounted() {
+        localStorage.setItem('lastQuery', this.query)
+        this.loadMovies()
     }
 
 }
