@@ -11,6 +11,7 @@
             <p><span class="title">Budget:</span> <span>${{ movie_details.budget }}</span></p>
             <p><span class="title">Release Date:</span><span>{{ movie_details.release_date }}</span></p>
             <p><span class="title">Revenue:</span><span>${{ movie_details.revenue }}</span></p>
+            <router-link :to="{path:`/movie/${routeParamsID}/cast`}">See Cast</router-link>
         </div>
     </div>
 

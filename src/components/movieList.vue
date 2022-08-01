@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="movies.length>0" class="top">
+        <div v-if="movies.length>0 && heading" class="top">
             <h3>{{ heading }}</h3>
             <router-link v-if="path" :to=path>More...</router-link>
         </div>
@@ -49,10 +49,16 @@ export default {
     mounted() {
         localStorage.setItem('lastQuery', this.query)
         Axios.get(`${BASE_URL}${this.keyword}?query=${this.query}&api_key=${API_KEY}`).then(res => {
-            if (res.data.results.length == 0){
-                this.isEmpty = true;
+            if (res.data.results){
+                if (res.data.results.length == 0){
+                    this.isEmpty = true;
+                };
+                console.log("results")
+                this.movies = res.data.results.slice(0, this.numberOfMovies)
+            } else if(res.data.cast){
+                console.log("cast");
+                this.movies =res.data.cast.slice(0, this.numberOfMovies)
             }
-            this.movies = res.data.results.slice(0, this.numberOfMovies)
             
         })
     }

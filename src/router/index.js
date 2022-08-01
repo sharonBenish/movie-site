@@ -36,6 +36,11 @@ const routes = [
     name:'Movie-Details',
     props:true,
     component:()=>import("../views/MovieDetails.vue"),
+  },
+  {
+    path:'/movie/:id/cast',
+    name:'Cast',
+    component:()=>import("../views/CastView.vue"),
   }
 ]
 
